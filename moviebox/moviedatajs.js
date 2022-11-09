@@ -1,5 +1,3 @@
-//#Display all info, allow user to sort films via rating etc
-//# also to add other Wes Anderson films
 
 let movieData = {
     "The Darjeeling Limited": {
@@ -47,24 +45,17 @@ console.log(movieData["The Grand Budapest Hotel"].runtime);
 console.log(movieData["The Grand Budapest Hotel"].rating);
 console.log(movieData["The Grand Budapest Hotel"].year);
 
-//let movieChoice = movieData["The Grand Budapest Hotel"];
-let movieChoice = movieData["Fantastic Mr. Fox"];
-console.log(movieChoice.cast);
-
-
-
-
-  let castString = "";
-  for (let i = 0; i < movieData["The Darjeeling Limited"].cast.length; i++) {
-    castString += movieData["The Darjeeling Limited"].cast[i] + ", ";
-  }
-  console.log(castString);
-
 
 
 // testing loading elements is working
 addEventListener('load', (event) => {
+    //let p = document.createElement('p');
+    //p.textContent = movieData.The Darjeeling Limited;
+    //p.textContent = Object.values(movieData["The Darjeeling Limited"]);
+    //document.querySelector('#container1').appendChild(p);
+    //document.getElementById("container1").innerHTML = "Iframe is loaded.";
+
     const para = document.createElement("p");
-    para.innerHTML =  movieChoice.year + movieChoice.cast + movieChoice.plot + movieChoice.rating;
+    para.innerHTML = movieData["The Darjeeling Limited"].cast[0];
     document.getElementById("container1").appendChild(para);
 });
