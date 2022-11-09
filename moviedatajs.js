@@ -1,3 +1,4 @@
+
 let movieData = {
     "The Darjeeling Limited": {
       plot: "A year after their father's funeral, three brothers travel across India by train in an attempt to bond with each other.",
@@ -6,7 +7,7 @@ let movieData = {
       rating: 7.2,
       year: 2007,
     },
-    
+
     "The Royal Tenenbaums": {
       plot: "The eccentric members of a dysfunctional family reluctantly gather under the same roof for various reasons",
       rating: 7.6,
@@ -36,3 +37,20 @@ let movieData = {
       cast: ["Ralph Fiennes", "F. Murray Abraham", "Mathieu Amalric"],
     },
   };
+
+
+console.log(movieData["The Darjeeling Limited"].cast[0]);
+console.log(movieData["Fantastic Mr. Fox"].plot);
+console.log(movieData["The Grand Budapest Hotel"].runtime);
+console.log(movieData["The Grand Budapest Hotel"].rating);
+console.log(movieData["The Grand Budapest Hotel"].year);
+
+
+
+// testing loading elements is working
+addEventListener('load', (event) => {
+
+    const para = document.createElement("p");
+    para.innerHTML = movieData["The Darjeeling Limited"].cast[0];
+    document.getElementById("container1").appendChild(para);
+});
