@@ -11,7 +11,7 @@ let movieData = {
     },
 
     "The Royal Tenenbaums": {
-      plot: "The eccentric members of a dysfunctional family reluctantly gather under the same roof for various reasons",
+      plot: "The eccentric members of a dysfunctional family reluctantly gather under the same roof for various reasons.",
       rating: 7.6,
       year: 2001,
       cast: ["Gene Hackman", "Gwnyeth Paltrow", "Anjelica Huston"],
@@ -47,24 +47,35 @@ console.log(movieData["The Grand Budapest Hotel"].runtime);
 console.log(movieData["The Grand Budapest Hotel"].rating);
 console.log(movieData["The Grand Budapest Hotel"].year);
 
-//let movieChoice = movieData["The Grand Budapest Hotel"];
-let movieChoice = movieData["Fantastic Mr. Fox"];
-console.log(movieChoice.cast);
+
+
+console.log(Object.keys(movieData));
+//movieChoice.year + movieChoice.cast + movieChoice.plot + movieChoice.rating;
+
+//get key properties movie strings into an array
+let movieList = Object.keys(movieData);
+  console.log(movieList[1]);
+  console.log(movieList[0]);
 
 
 
 
-  let castString = "";
-  for (let i = 0; i < movieData["The Darjeeling Limited"].cast.length; i++) {
-    castString += movieData["The Darjeeling Limited"].cast[i] + ", ";
+  for (let i = 0; i < movieList.length; i++) {
+  
   }
-  console.log(castString);
+  
 
+  
 
-
+let a = 3;
 // testing loading elements is working
 addEventListener('load', (event) => {
-    const para = document.createElement("p");
-    para.innerHTML =  movieChoice.year + movieChoice.cast + movieChoice.plot + movieChoice.rating;
+
+  for (let i = 0; i < movieList.length; i++) {
+
+    const para = document.createElement("div");
+    para.innerHTML = movieList[i] + "<br/><br/>" + movieData[movieList[i]].year + "<br/><br/>" + movieData[movieList[i]].plot + "<br/><br/>Runtime: " + movieData[movieList[i]].runtime + " minutes<br/>" + "Rating: " + movieData[movieList[i]].rating;//Object.keys(movieData);
     document.getElementById("container1").appendChild(para);
+  }
+
 });
