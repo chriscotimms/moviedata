@@ -41,40 +41,44 @@ let movieData = {
   };
 
 
-console.log(movieData["The Darjeeling Limited"].cast[0]);
-console.log(movieData["Fantastic Mr. Fox"].plot);
-console.log(movieData["The Grand Budapest Hotel"].runtime);
-console.log(movieData["The Grand Budapest Hotel"].rating);
-console.log(movieData["The Grand Budapest Hotel"].year);
 
 
 
-console.log(Object.keys(movieData));
-//movieChoice.year + movieChoice.cast + movieChoice.plot + movieChoice.rating;
 
 //get key properties movie strings into an array
 let movieList = Object.keys(movieData);
   console.log(movieList[1]);
   console.log(movieList[0]);
 
+  /*
+//check values of ratings key, then output to an array
+let ratingSorted = [];
+for (let i = 0; i < movieList.length; i++) {
+ratingSorted.push(movieData[movieList[i]].rating);
+}
+console.log(ratingSorted);
+*/
 
 
-
-  for (let i = 0; i < movieList.length; i++) {
-  
+//check values of ratings key, then output to an Object
+const ratingObject = new Object();
+for (let i = 0; i < movieList.length; i++) {
+  ratingObject[i] = movieData[movieList[i]].rating;
   }
-  
+console.log(Object.values(ratingObject));
 
-  
 
-let a = 3;
+
+
+
 // testing loading elements is working
 addEventListener('load', (event) => {
 
-  for (let i = 0; i < movieList.length; i++) {
-
-    const para = document.createElement("div");
-    para.innerHTML = movieList[i] + "<br/><br/>" + movieData[movieList[i]].year + "<br/><br/>" + movieData[movieList[i]].plot + "<br/><br/>Runtime: " + movieData[movieList[i]].runtime + " minutes<br/>" + "Rating: " + movieData[movieList[i]].rating;//Object.keys(movieData);
+  for (let i = 0; i < movieList.length; i++) // get length of movielist
+  {
+    const para = document.createElement("div"); 
+    para.className = "movieinfo";
+    para.innerHTML = movieList[i] + "<br/><br/>" + movieData[movieList[i]].plot + "<br/><br/>" + movieData[movieList[i]].year + "<br/><br/>Runtime: " + movieData[movieList[i]].runtime + " minutes<br/>" + "Rating: " + movieData[movieList[i]].rating;//Object.keys(movieData);
     document.getElementById("container1").appendChild(para);
   }
 
