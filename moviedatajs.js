@@ -41,28 +41,23 @@ let movieData = {
   };
 
 
-// testing loading elements are working
-addEventListener('load', (event) => {
-
-  for (let i = 0; i < movieList.length; i++) // get length of movielist
-  {
-    const para = document.createElement("div"); 
-    para.className = "movieinfo";
-    para.innerHTML = movieList[i] + "<br/><br/>" + movieData[movieList[i]].plot + "<br/><br/>" + movieData[movieList[i]].year + "<br/><br/>Runtime: " + movieData[movieList[i]].runtime + " minutes<br/>" + "Rating: " + movieData[movieList[i]].rating;//Object.keys(movieData);
-    document.getElementById("container1").appendChild(para);
-  }
-});
 
 
-console.log(Object.entries(movieData)[0][1].rating);//a working way to access info as a whole
+//(movieData)<-nameofObject--[0-3]<-Film number--[0]<-FilmNameString/[1]=Sub-keys + values, eg .plot
+console.log(Object.entries(movieData)[0][0]);//a working way to access info as an object
+
+let ratingSorted = [];
+for (let i = 0; i < Object.entries(movieData).length; i++) {
+  ratingSorted += Object.entries(movieData)[i][1].runtime + "!!!";
+}
+console.log(ratingSorted);
 
 
-/*
 //get key properties movie strings into an array
 let movieList = Object.keys(movieData);
   console.log(movieList[1]);
   console.log(movieList[0]);
-
+/*
 
 //check values of ratings key, then output to an array
 let ratingSorted = [];
@@ -91,3 +86,14 @@ console.log(Object.values(ratingObject));
 
 
 
+// testing loading elements are working
+addEventListener('load', (event) => {
+
+  for (let i = 0; i < movieList.length; i++) // get length of movielist
+  {
+    const para = document.createElement("div"); 
+    para.className = "movieinfo";
+    para.innerHTML = movieList[i] + "<br/><br/>" + movieData[movieList[i]].plot + "<br/><br/>" + movieData[movieList[i]].year + "<br/><br/>Runtime: " + movieData[movieList[i]].runtime + " minutes<br/>" + "Rating: " + movieData[movieList[i]].rating;//Object.keys(movieData);
+    document.getElementById("container1").appendChild(para);
+  }
+});
