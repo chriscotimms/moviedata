@@ -41,39 +41,7 @@ let movieData = {
   };
 
 
-
-
-
-
-//get key properties movie strings into an array
-let movieList = Object.keys(movieData);
-  console.log(movieList[1]);
-  console.log(movieList[0]);
-
-  
-//check values of ratings key, then output to an array
-let ratingSorted = [];
-for (let i = 0; i < movieList.length; i++) {
-ratingSorted.push(movieData[movieList[i]].rating);
-}
-console.log(ratingSorted);
-
-ratingSorted.sort((a, b) => b - a);
-console.log(ratingSorted);
-
-/*
-//check values of ratings key, then output to an Object
-const ratingObject = new Object();
-for (let i = 0; i < movieList.length; i++) {
-  ratingObject[i] = movieData[movieList[i]].rating;
-  }
-console.log(Object.values(ratingObject));
-*/
-
-
-
-
-// testing loading elements is working
+// testing loading elements are working
 addEventListener('load', (event) => {
 
   for (let i = 0; i < movieList.length; i++) // get length of movielist
@@ -83,5 +51,43 @@ addEventListener('load', (event) => {
     para.innerHTML = movieList[i] + "<br/><br/>" + movieData[movieList[i]].plot + "<br/><br/>" + movieData[movieList[i]].year + "<br/><br/>Runtime: " + movieData[movieList[i]].runtime + " minutes<br/>" + "Rating: " + movieData[movieList[i]].rating;//Object.keys(movieData);
     document.getElementById("container1").appendChild(para);
   }
-
 });
+
+
+console.log(Object.entries(movieData)[0][1].rating);//a working way to access info as a whole
+
+
+/*
+//get key properties movie strings into an array
+let movieList = Object.keys(movieData);
+  console.log(movieList[1]);
+  console.log(movieList[0]);
+
+
+//check values of ratings key, then output to an array
+let ratingSorted = [];
+for (let i = 0; i < movieList.length; i++) {
+ratingSorted.push(movieData[movieList[i]].rating);
+}
+console.log(ratingSorted);
+
+//Sort order according to ratings
+ratingSorted.sort((a, b) => b - a);
+console.log(ratingSorted);
+
+//find items based on order 
+
+
+
+
+//check values of ratings key, then output to an Object
+const ratingObject = new Object();
+for (let i = 0; i < movieList.length; i++) {
+  ratingObject[i] = movieData[movieList[i]].rating;
+  }
+console.log(Object.values(ratingObject));
+
+ */
+
+
+
