@@ -50,23 +50,25 @@ let movieList = Object.keys(movieData);
   console.log(movieList[1]);
   console.log(movieList[0]);
 
-  /*
+  
 //check values of ratings key, then output to an array
 let ratingSorted = [];
 for (let i = 0; i < movieList.length; i++) {
 ratingSorted.push(movieData[movieList[i]].rating);
 }
 console.log(ratingSorted);
-*/
 
+ratingSorted.sort((a, b) => b - a);
+console.log(ratingSorted);
 
+/*
 //check values of ratings key, then output to an Object
 const ratingObject = new Object();
 for (let i = 0; i < movieList.length; i++) {
   ratingObject[i] = movieData[movieList[i]].rating;
   }
 console.log(Object.values(ratingObject));
-
+*/
 
 
 
