@@ -42,15 +42,99 @@ let movieData = {
 
 
 
-
 //(movieData)<-nameofObject--[0-3]<-Film number--[0]<-FilmNameString/[1]=Sub-keys + values, eg .plot
 console.log(Object.entries(movieData)[0][0]);//a working way to access info as an object
+console.log(Object.keys(movieData)[1]);//a working way to access info as an object
+console.log(Object.values(movieData)[1]);//a working way to access info as an object
 
-let ratingSorted = [];
-for (let i = 0; i < Object.entries(movieData).length; i++) {
-  ratingSorted += Object.entries(movieData)[i][1].runtime + "!!!";
-}
+let ratingSorted = Object.entries(movieData);
 console.log(ratingSorted);
+/*
+for (let i = 0; i < Object.entries(movieData).length; i++) {
+  ratingSorted.push(Object.entries(movieData)[i][1].runtime);
+}
+*/
+
+
+//Copy array and sort order according to ratings
+let ratingSortedCopy = [...ratingSorted];
+let arr = [];
+let len = ratingSortedCopy.length;
+for (var i = 0; i < len; i++) {
+    arr.push({
+        movie: ratingSortedCopy[i][0],
+        runtime: ratingSortedCopy[i][1].runtime
+    });
+}
+console.log(arr);
+//arr.sort(function(a, b) {return b[0][1].runtime - a[1][1].runtime });
+//console.log(ratingSorted + "ratingsSorted");
+//console.log(ratingSortedCopy + "ratingsSortedCopy");
+
+
+
+
+/*
+let result = [];
+const compareArrays = (a, b) => {
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] == b) {
+      result.push(i + 'yes');
+      } else {
+        //result.push(i + 'no');
+      }
+    } 
+    console.log(result);
+  }
+  
+  
+console.log(compareArrays(ratingSortedCopy, ratingSorted[0]));
+*/
+
+
+
+
+/*
+function comparativeFunction(c, d) {
+  for (var varIndex = 0; varIndex < d.length; varIndex++) {
+    compareArrays(d, c[varIndex]);
+}
+}
+comparativeFunction(ratingSortedCopy, ratingSorted);
+*/
+
+
+/*
+const compareArrays = (a, b) => {
+  let result = [];
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] == b[i]) {
+      result.push(i);
+    } else {
+      for (var j = 0; i < b.length; j++){
+        if (a[i] == b[j]) {
+          result.push(j);
+        }
+      }
+
+    }
+  }
+  return result;
+  }
+
+  console.log(compareArrays(ratingsSortedCopy, ratingSorted));
+*/   
+
+
+//map out change in array, to rearrange display order
+//let newOrder = [];
+//for (let i = 0; i < Object.entries(movieData).length; i++) {
+//  if (ratingSorted[i] === Object.entries(movieData)[i][1].runtime);
+//  newOrder.push(i);
+//} 
+//console.log(newOrder);
+
+
 
 
 //get key properties movie strings into an array
