@@ -45,13 +45,27 @@ let movieData = {
 //console.log("meArray" + meArray);
 
 const me = Object.entries(movieData);
-//console.log("me" + me);
+console.log("me" + me);
+console.log("me[1]" + me[1]);
+
+const meArray = [];
 
 me.forEach(([key, value], index) => {
-  console.log(index);
-  console.log(key);
-  console.log(value.rating);
+  //console.log(index, key);
+  //console.log(value.rating);
+  //console.log(value);
+  meArray.push(value);
 });
+
+console.log(meArray);
+console.log(meArray[1]);
+
+
+
+meArray.sort((a, b) => {
+  return b.rating - a.rating;
+});
+console.log(meArray);
 
 
 /*
