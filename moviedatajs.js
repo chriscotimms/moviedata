@@ -44,28 +44,42 @@ let movieData = {
 //const meArray = Object.entries(me);
 //console.log("meArray" + meArray);
 
-const me = Object.entries(movieData);
-console.log("me" + me);
-console.log("me[1]" + me[1]);
+const me = Object.entries(movieData); // turn overall structure into an array
 
-const meArray = [];
-
-me.forEach(([key, value], index) => {
-  //console.log(index, key);
-  //console.log(value.rating);
-  //console.log(value);
-  meArray.push(value);
+me.forEach(([key, value]) => { //add key of upper object into properties with values within object
+  //console.log(key, value);
+  value.name = key;
+  //console.log(value.name);
 });
 
-console.log(meArray);
-console.log(meArray[1]);
+console.log("me summary " + me);
 
 
 
-meArray.sort((a, b) => {
-  return b.rating - a.rating;
+
+
+const byRating = me.sort((a, b) => { //sorts - still needs to be anonymised
+  return b[1].runtime - a[1].runtime;
 });
-console.log(meArray);
+console.log(byRating[0][0] + byRating[1][0] + byRating[2] + byRating[3]);
+console.log(byRating);
+
+
+
+
+addEventListener('load', (event) => { //onload, should be distinct from onclick
+
+  for (let i = 0; i < byRating.length; i++) // get length of movielist
+  {
+    const para = document.createElement("div"); 
+    para.className = "movieinfo";
+    para.innerHTML = byRating[i][0] + "<br/><br/>" + byRating[i][1].plot + "<br/><br/>" + byRating[i][1].year + "<br/><br/>Runtime: " + byRating[i][1].runtime + " minutes<br/>" + "Rating: " + byRating[i][1].rating; //verbose, could clean
+    document.getElementById("container1").appendChild(para);
+  }
+  });
+
+
+
 
 
 /*
@@ -198,10 +212,7 @@ console.log(compareArrays(ratingsSortedCopy, ratingSorted));
 
 
 
-//get key properties movie strings into an array
-let movieList = Object.keys(movieData);
-console.log(movieList[1]);
-console.log(movieList[0]);
+
 /*
 
 //check values of ratings key, then output to an array
@@ -230,6 +241,12 @@ console.log(Object.values(ratingObject));
 */
 
 
+/*
+
+//get key properties movie strings into an array
+let movieList = Object.keys(movieData);
+console.log(movieList[1]);
+console.log(movieList[0]);
 
 // testing loading elements are working
 addEventListener('load', (event) => {
@@ -242,3 +259,4 @@ for (let i = 0; i < movieList.length; i++) // get length of movielist
   document.getElementById("container1").appendChild(para);
 }
 });
+*/
