@@ -84,9 +84,9 @@ addEventListener('load', (event) => { //onload, should be distinct from onclick
 //using anonymous variables with sort function
 //to be able to call any numerical property to sort
 function sortByProperty(inputArray, property){
-  var inputArrayClone = JSON.parse(JSON.stringify(inputArray))
+  var inputArrayClone = JSON.parse(JSON.stringify(inputArray));
   let byRating = inputArrayClone.sort((a, b) => { //sorts - still needs to be anonymised
-    return a[property] - b[property];
+  return b[property] - a[property];
   });
   return byRating; 
 }
@@ -98,11 +98,11 @@ function sortByProperty(inputArray, property){
 //let sortedArray2 = sortByProperty(agregator, "runtime");
 //console.log("rating ", sortedArray2);
 
-let sortedArray4 = sortByProperty(agregator, "year");
-console.log("year ", sortedArray4);
+//let sortedArray4 = sortByProperty(agregator, "year");
+//console.log("year ", sortedArray4);
 
-let sortedArray3 = sortByProperty(agregator, "runtime");
-console.log("runtime ", sortedArray3);
+//let sortedArray3 = sortByProperty(agregator, "runtime");
+//console.log("runtime ", sortedArray3);
 /*
 */
 
@@ -111,36 +111,47 @@ console.log("runtime ", sortedArray3);
 
 
 
-/*
-function updateMovieInfo() {
+// /*
+function updateMovieInfo(sortedArray) {
   document.querySelectorAll(".movieinfo").forEach(elements => elements.remove()); //remove all children with ".movieinfo" class
   
 
-                for (let i = 0; i < byRating.length; i++) // for loop to process selector through moviedata (/me)
+                for (let i = 0; i < sortedArray.length; i++) // for loop to process selector through moviedata (/me)
                 {
                   const para = document.createElement("div"); 
                   para.className = "movieinfo";
-                  para.innerHTML = byRating[i][0] + "<br/><br/>" + byRating[i][1].plot + "<br/><br/>" + byRating[i][1].year + "<br/><br/>Runtime: " + byRating[i][1].runtime + " minutes<br/>" + "Rating: " + byRating[i][1].rating; //verbose, could clean
+                  para.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating; //verbose, could clean
                   document.getElementById("container1").appendChild(para);
                 }
   
   };
-///*
+// */
+
+// /*
 // radio buttons
 var rad = document.myForm.selection;
 var prev = null;
+let sortedChoice = null;
 for (var i = 0; i < rad.length; i++) {
     rad[i].addEventListener('change', function() {
         if (this !== prev) {
             prev = this; //update prev 
-            updateMovieInfo(this);
         }
 
-        console.log(this.value)
+        console.log(this.value);
+        sortedChoice = sortByProperty(agregator, `${this.value}`);
+        console.log("Sorted Choice ", sortedChoice);
+        updateMovieInfo(sortedChoice);
+
     });
 }
 
-*/
+
+
+
+
+
+// */
 
 
 /*
