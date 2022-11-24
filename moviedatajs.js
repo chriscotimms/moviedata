@@ -85,53 +85,54 @@ addEventListener('load', (event) => { //onload, should be distinct from onclick
 //to be able to call any numerical property to sort
 function sortByProperty(inputArray, property){
   var inputArrayClone = JSON.parse(JSON.stringify(inputArray));
-  let byRating = inputArrayClone.sort((a, b) => { //sorts - still needs to be anonymised
+  let byRating = inputArrayClone.sort((a, b) => { 
   return b[property] - a[property];
   });
   return byRating; 
 }
 
-//let genericArray = [{test:1010}, {test:1005}, {test:1075}];
-//let sortedArray = sortByProperty(genericArray, "test");
-//console.log("test ", sortedArray);
-
-//let sortedArray2 = sortByProperty(agregator, "runtime");
-//console.log("rating ", sortedArray2);
-
-//let sortedArray4 = sortByProperty(agregator, "year");
-//console.log("year ", sortedArray4);
-
-//let sortedArray3 = sortByProperty(agregator, "runtime");
-//console.log("runtime ", sortedArray3);
-/*
-*/
 
 
 
 
 
 
-// /*
+
+//function to clear .movieinfo class objects + repopulate with sorted info
 function updateMovieInfo(sortedArray) {
-  document.querySelectorAll(".movieinfo").forEach(elements => elements.remove()); //remove all children with ".movieinfo" class
-  
 
-                for (let i = 0; i < sortedArray.length; i++) // for loop to process selector through moviedata (/me)
-                {
-                  const para = document.createElement("div"); 
-                  para.className = "movieinfo";
-                  para.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating; //verbose, could clean
-                  document.getElementById("container1").appendChild(para);
-                }
-  
-  };
-// */
+document.querySelectorAll(".movieinfo").forEach(elements => elements.remove()); //remove all children with ".movieinfo" class 
+for (let i = 0; i < sortedArray.length; i++) // for loop to process selector through moviedata (/me)
+  {
+   /*
+    const fragment = document.createDocumentFragment();
+    const bbb = fragment
+    .appendChild(document.createElement('section'))
+    .appendChild(document.createElement('ul'))
+    .appendChild(document.createElement('li'));
+    bbb.textContent = 'hello world';
 
-// /*
-// radio buttons
+    document.body.appendChild(fragment);
+ */
+    
+    const para = document.createElement("div"); 
+    const image = document.createElement("img"); 
+    const textInfo = document.createElement("p");
+    para.className = "movieinfo";
+    image.className = "movieimg";
+    textInfo.className = "textInfo";
+    image.src = 'https://upload.wikimedia.org/wikipedia/en/1/1e/Darjeeling_Limited_Poster.jpg';
+    textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating; //verbose, could clean
+    document.getElementById("container1").appendChild(para).appendChild(image);
+    document.getElementById("container1").appendChild(para).appendChild(textInfo);
+  }
+  
+};
+
+// radio buttons trigger functions on change
 var rad = document.myForm.selection;
 var prev = null;
-let sortedChoice = null;
+//let sortedChoice = null;
 for (var i = 0; i < rad.length; i++) {
     rad[i].addEventListener('change', function() {
         if (this !== prev) {
@@ -139,7 +140,7 @@ for (var i = 0; i < rad.length; i++) {
         }
 
         console.log(this.value);
-        sortedChoice = sortByProperty(agregator, `${this.value}`);
+        let = sortedChoice = sortByProperty(agregator, `${this.value}`);
         console.log("Sorted Choice ", sortedChoice);
         updateMovieInfo(sortedChoice);
 
