@@ -59,6 +59,25 @@ for (var i = 0; i < me.length; i++){
 console.log(agregator);
 
 
+
+
+const filmSrcUrlArray = ['https://flxt.tmsimg.com/assets/p168522_p_v12_bf.jpg', 'https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg', 'https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg', 'https://flxt.tmsimg.com/assets/p10295153_p_v8_at.jpg'];
+
+for (var i = 0; i < agregator.length; i++) {
+    agregator[i].imgUrl = filmSrcUrlArray[i];
+    //agregator[i].imgUrl = 'medium';
+    console.log(agregator[i]);
+    console.log(filmSrcUrlArray[i]);
+};
+
+
+
+//add image links
+//Grand budapest: https://flxt.tmsimg.com/assets/p10295153_p_v8_at.jpg
+//darjeeling: https://flxt.tmsimg.com/assets/p168522_p_v12_bf.jpg
+//royal: https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg
+//Fox: https://1.bp.blogspot.com/-RF_qSAbHsaw/V2MH6sz7KII/AAAAAAAATd4/FRFToyzbWlQWiFhg8Q78e7_9pD40g1PuACLcB/s1600/fantastic-mr-fox-movie-poster.jpg
+
 /*
 const byRating = me.sort((a, b) => { //sorts - still needs to be anonymised
   return b[1].year - a[1].year;
