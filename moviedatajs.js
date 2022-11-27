@@ -59,46 +59,17 @@ for (var i = 0; i < me.length; i++){
 console.log(agregator);
 
 
-
-
-const filmSrcUrlArray = ['https://flxt.tmsimg.com/assets/p168522_p_v12_bf.jpg', 'https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg', 'https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg', 'https://flxt.tmsimg.com/assets/p10295153_p_v8_at.jpg'];
+//add image links
+const filmSrcUrlArray = ['https://flxt.tmsimg.com/assets/p168522_p_v12_bf.jpg', 'https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg', 'https://darkroom.bbfc.co.uk/751/https://m.media-amazon.com/images/M/MV5BOGUwYTU4NGEtNDM4MS00NDRjLTkwNmQtOTkwMWMyMjhmMjdlXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg:2bdb83fdce0a274995e7e3cdaf0da42a', 'https://flxt.tmsimg.com/assets/p10295153_p_v8_at.jpg'];
 
 for (var i = 0; i < agregator.length; i++) {
     agregator[i].imgUrl = filmSrcUrlArray[i];
-    //agregator[i].imgUrl = 'medium';
-    console.log(agregator[i]);
-    console.log(filmSrcUrlArray[i]);
 };
 
 
 
-//add image links
-//Grand budapest: https://flxt.tmsimg.com/assets/p10295153_p_v8_at.jpg
-//darjeeling: https://flxt.tmsimg.com/assets/p168522_p_v12_bf.jpg
-//royal: https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg
-//Fox: https://1.bp.blogspot.com/-RF_qSAbHsaw/V2MH6sz7KII/AAAAAAAATd4/FRFToyzbWlQWiFhg8Q78e7_9pD40g1PuACLcB/s1600/fantastic-mr-fox-movie-poster.jpg
-
-/*
-const byRating = me.sort((a, b) => { //sorts - still needs to be anonymised
-  return b[1].year - a[1].year;
-});
-console.log(byRating[0][0] + byRating[1][0] + byRating[2] + byRating[3]);
-console.log(byRating);
-*/
 
 
-/*
-addEventListener('load', (event) => { //onload, should be distinct from onclick
-
-  for (let i = 0; i < byRating.length; i++) // get length of movielist
-  {
-    const para = document.createElement("div"); 
-    para.className = "movieinfo";
-    para.innerHTML = byRating[i][0] + "<br/><br/>" + byRating[i][1].plot + "<br/><br/>" + byRating[i][1].year + "<br/><br/>Runtime: " + byRating[i][1].runtime + " minutes<br/>" + "Rating: " + byRating[i][1].rating; //verbose, could clean
-    document.getElementById("container1").appendChild(para);
-  }
-  });
-*/
 
 //using anonymous variables with sort function
 //to be able to call any numerical property to sort
@@ -109,6 +80,7 @@ function sortByProperty(inputArray, property){
   });
   return byRating; 
 }
+
 
 
 
@@ -140,10 +112,11 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     para.className = "movieinfo";
     image.className = "movieimg";
     textInfo.className = "textInfo";
-    image.src = 'https://upload.wikimedia.org/wikipedia/en/1/1e/Darjeeling_Limited_Poster.jpg';
+    image.src = sortedArray[i].imgUrl;
     textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating; //verbose, could clean
     document.getElementById("container1").appendChild(para).appendChild(image);
     document.getElementById("container1").appendChild(para).appendChild(textInfo);
+    console.log('viewing properties' , sortedArray[i].imgUrl);
   }
   
 };
@@ -159,7 +132,7 @@ for (var i = 0; i < rad.length; i++) {
         }
 
         console.log(this.value);
-        let = sortedChoice = sortByProperty(agregator, `${this.value}`);
+        let sortedChoice = sortByProperty(agregator, `${this.value}`);
         console.log("Sorted Choice ", sortedChoice);
         updateMovieInfo(sortedChoice);
 
