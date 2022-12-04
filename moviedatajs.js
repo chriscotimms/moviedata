@@ -107,15 +107,20 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
  */
     
     const para = document.createElement("div"); 
+    const textContainer = document.createElement("div");
     const image = document.createElement("img"); 
     const textInfo = document.createElement("p");
+
     para.className = "movieinfo";
     image.className = "movieimg";
+    textContainer.className = "textContainer";
     textInfo.className = "textInfo";
+
     image.src = sortedArray[i].imgUrl;
     textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating; //verbose, could clean
-    document.getElementById("container1").appendChild(para).appendChild(image);
-    document.getElementById("container1").appendChild(para).appendChild(textInfo);
+    document.getElementById("container1").appendChild(para).appendChild(textContainer);
+    textContainer.appendChild(image);
+    textContainer.appendChild(textInfo);
     console.log('viewing properties' , sortedArray[i].imgUrl);
   }
   

@@ -1,0 +1,54 @@
+.container {
+    background-color: rgb(255, 161, 161);
+    border-radius: 9px;
+    padding: 5px;
+    width:100%;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px 20px;
+
+}
+
+.movieinfo {
+    background-color: rgb(228, 228, 228);
+    border-radius: 9px;
+    padding: 10px;
+    width: 350px;
+    order: 2;
+}
+
+
+
+
+
+/*text block div*/
+.textContainer {
+    position: relative;
+    padding: 0px;
+    /*max-width: 800px;  Maximum width */
+    /* margin: 0 auto;  Center it */
+}
+
+.movieimg {
+    background-color: rgb(98, 255, 7);
+    padding: 0px;
+    width: 100%;
+}
+
+/*text itself*/
+.textInfo {
+    position: absolute;
+    top:50%;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    background-color:rgba(0,0,0,0.7);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+
