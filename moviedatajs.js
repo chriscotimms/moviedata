@@ -43,7 +43,6 @@ let movieData = {
 
 // turn overall structure into an array
 const me = Object.entries(movieData); 
-//console.log(me);
 
 //add key of upper object into properties with values within object
 me.forEach(([key, value]) => { 
@@ -65,6 +64,8 @@ const filmSrcUrlArray = ['https://flxt.tmsimg.com/assets/p168522_p_v12_bf.jpg', 
 for (var i = 0; i < agregator.length; i++) {
     agregator[i].imgUrl = filmSrcUrlArray[i];
 };
+
+
 
 
 
@@ -95,27 +96,19 @@ function updateMovieInfo(sortedArray) {
 document.querySelectorAll(".movieinfo").forEach(elements => elements.remove()); //remove all children with ".movieinfo" class 
 for (let i = 0; i < sortedArray.length; i++) // for loop to process selector through moviedata (/me)
   {
-   /*
-    const fragment = document.createDocumentFragment();
-    const bbb = fragment
-    .appendChild(document.createElement('section'))
-    .appendChild(document.createElement('ul'))
-    .appendChild(document.createElement('li'));
-    bbb.textContent = 'hello world';
-
-    document.body.appendChild(fragment);
- */
-    
+    //create elements para -> textContainer -> img + p
     const para = document.createElement("div"); 
     const textContainer = document.createElement("div");
     const image = document.createElement("img"); 
     const textInfo = document.createElement("p");
 
+    //assign CSS classes
     para.className = "movieinfo";
     image.className = "movieimg";
     textContainer.className = "textContainer";
     textInfo.className = "textInfo";
 
+    //display sorted array + append child functions
     image.src = sortedArray[i].imgUrl;
     textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating; //verbose, could clean
     document.getElementById("container1").appendChild(para).appendChild(textContainer);
@@ -123,27 +116,38 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     textContainer.appendChild(textInfo);
     console.log('viewing properties' , sortedArray[i].imgUrl);
   }
-  
 };
 
 // radio buttons trigger functions on change
-var rad = document.myForm.selection;
-var prev = null;
+let rad = document.myForm.selection;
+let prev = 'rating';
 //let sortedChoice = null;
 for (var i = 0; i < rad.length; i++) {
     rad[i].addEventListener('change', function() {
         if (this !== prev) {
             prev = this; //update prev 
         }
-
         console.log(this.value);
         let sortedChoice = sortByProperty(agregator, `${this.value}`);
-        console.log("Sorted Choice ", sortedChoice);
         updateMovieInfo(sortedChoice);
 
     });
 }
 
+
+
+
+
+
+var newPageLoadCountValue = Number(localStorage.getItem('pageLoadCount')) + 1;
+localStorage.setItem('pageLoadCount', newPageLoadCountValue);
+console.log(localStorage.getItem('pageLoadCount', newPageLoadCountValue));
+
+if (newPageLoadCountValue < 2) {
+  console.log('true');
+} else {
+  console.log('false');
+}
 
 
 
