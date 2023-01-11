@@ -121,12 +121,11 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
 // radio buttons trigger functions on change
 let rad = document.myForm.selection;
 let prev = 'rating';
-//let sortedChoice = null;
 for (var i = 0; i < rad.length; i++) {
     rad[i].addEventListener('change', function() {
         if (this !== prev) {
             prev = this; //update prev 
-        }
+        } 
         console.log(this.value);
         let sortedChoice = sortByProperty(agregator, `${this.value}`);
         updateMovieInfo(sortedChoice);
@@ -134,31 +133,8 @@ for (var i = 0; i < rad.length; i++) {
     });
 }
 
+// set up initial loading of page
+let sortedChoice = sortByProperty(agregator, 'rating');
+updateMovieInfo(sortedChoice);
 
 
-
-
-
-var newPageLoadCountValue = Number(localStorage.getItem('pageLoadCount')) + 1;
-localStorage.setItem('pageLoadCount', newPageLoadCountValue);
-console.log(localStorage.getItem('pageLoadCount', newPageLoadCountValue));
-
-if (newPageLoadCountValue < 2) {
-  console.log('true');
-} else {
-  console.log('false');
-}
-
-
-
-
-
-// */
-
-
-/*
-const para = document.createElement("div"); 
-para.className = "movieinfo";
-para.innerHTML = byRating[i][0] + "<br/><br/>" + byRating[i][1].plot + "<br/><br/>" + byRating[i][1].year + "<br/><br/>Runtime: " + byRating[i][1].runtime + " minutes<br/>" + "Rating: " + byRating[i][1].rating; //verbose, could clean
-document.getElementById("container1").appendChild(para);
-*/
