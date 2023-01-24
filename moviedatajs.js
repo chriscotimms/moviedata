@@ -121,6 +121,7 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     commentText.setAttribute("type", "text");
     const commentButton = document.createElement("button");
     const texttext = document.createTextNode('Submit review');
+    const commentscomments = document.createElement("div");
 
     //assign CSS classes (and ID for tracking comments)
     para.className = "movieinfo";
@@ -129,6 +130,7 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     textInfo.className = "textInfo";
     commentButton.setAttribute('id', [i]); //sortedChoice[i].name
     commentText.setAttribute('id', [i]);  //sortedChoice[i].name
+    commentscomments.setAttribute('id', 'comments'+[i]);//div id for comments
 
     //display sorted array + append child functions
     image.src = sortedArray[i].imgUrl;
@@ -139,6 +141,7 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     textInfo.appendChild(commentText);
     commentButton.appendChild(texttext);
     textInfo.appendChild(commentButton);
+    textContainer.appendChild(commentscomments);
 
     //console.log('viewing properties' , sortedArray[i].imgUrl);
   }
@@ -199,11 +202,13 @@ wrapper.addEventListener('click', (event) => {
   const texty = document.getElementById(targetget).value;
   //agregator.forEach((obj) => obj.commentArray = []);
   sortedChoice[targetget].commentArray.push(texty);
+  document.getElementById('comments'+[targetget]).innerHTML = texty;
   //sortedChoice[targetget].commentAdded = texty;
   //console.dir(sortedChoice[targetget]);
   //console.dir(texty);
   //console.dir(targetget);
-  console.log(sortedChoice[targetget]);
+  console.log(sortedChoice[0]);
+  console.log(sortedChoice[1]);
 
 
   
