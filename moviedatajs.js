@@ -49,8 +49,8 @@ me.forEach(([key, value]) => {
 value.name = key;
 });
 
-//turn array of objects of objects into array of objects
-//removing nesting level of objects
+//turn "array of objects of objects" into "array of objects"
+//+ removing nesting level of objects
 const agregator = [];
 for (var i = 0; i < me.length; i++){
   agregator[i] = me[i][1];
@@ -59,13 +59,29 @@ console.log(agregator);
 
 
 //add image links
-const filmSrcUrlArray = ['https://flxt.tmsimg.com/assets/p168522_p_v12_bf.jpg', 'https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg', 'https://darkroom.bbfc.co.uk/751/https://m.media-amazon.com/images/M/MV5BOGUwYTU4NGEtNDM4MS00NDRjLTkwNmQtOTkwMWMyMjhmMjdlXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg:2bdb83fdce0a274995e7e3cdaf0da42a', 'https://flxt.tmsimg.com/assets/p10295153_p_v8_at.jpg'];
+const filmSrcUrlArray = ['https://flxt.tmsimg.com/assets/p168522_p_v12_bf.jpg', 
+'https://flxt.tmsimg.com/assets/p26926_p_v8_aa.jpg', 
+'https://cdn.shopify.com/s/files/1/0037/8008/3782/products/EEC8D35A-C900-4EF1-B476-C9F876492747-328288_1024x1024@2x.jpg?v=1611687955', 
+'https://flxt.tmsimg.com/assets/p10295153_p_v8_at.jpg'];
 
 for (var i = 0; i < agregator.length; i++) {
     agregator[i].imgUrl = filmSrcUrlArray[i];
 };
 
 
+
+
+
+agregator.forEach((obj) => obj.commentArray = new Array);
+
+/////Adding comment arrays to all Movie Objects
+//for (var i = 0; i < agregator.length; i++) {
+ //agregator[i].push({'commentArray'});
+  //sortedChoice[i].comments = commentArray;
+ //}
+  //console.log(agregator[0].commentArray[0]);
+
+//agregator[0].commentArray = "movie1";
 
 
 
@@ -101,12 +117,18 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     const textContainer = document.createElement("div");
     const image = document.createElement("img"); 
     const textInfo = document.createElement("p");
+    const commentText = document.createElement("input");
+    commentText.setAttribute("type", "text");
+    const commentButton = document.createElement("button");
+    const texttext = document.createTextNode('Submit review');
 
-    //assign CSS classes
+    //assign CSS classes (and ID for tracking comments)
     para.className = "movieinfo";
     image.className = "movieimg";
     textContainer.className = "textContainer";
     textInfo.className = "textInfo";
+    commentButton.setAttribute('id', [i]); //sortedChoice[i].name
+    commentText.setAttribute('id', [i]);  //sortedChoice[i].name
 
     //display sorted array + append child functions
     image.src = sortedArray[i].imgUrl;
@@ -114,13 +136,17 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     document.getElementById("container1").appendChild(para).appendChild(textContainer);
     textContainer.appendChild(image);
     textContainer.appendChild(textInfo);
-    console.log('viewing properties' , sortedArray[i].imgUrl);
+    textInfo.appendChild(commentText);
+    commentButton.appendChild(texttext);
+    textInfo.appendChild(commentButton);
+
+    //console.log('viewing properties' , sortedArray[i].imgUrl);
   }
 };
 
 // radio buttons trigger functions on change
 let rad = document.myForm.selection;
-let prev = 'rating';
+let prev = null;
 for (var i = 0; i < rad.length; i++) {
     rad[i].addEventListener('change', function() {
         if (this !== prev) {
@@ -138,3 +164,113 @@ let sortedChoice = sortByProperty(agregator, 'rating');
 updateMovieInfo(sortedChoice);
 
 
+
+////////////////////////////////////adding comment box////////
+/*
+let commentArray = [];
+agregator[0].comments = commentArray;
+
+document.getElementById('btn').addEventListener('click', function(){
+  let texty = document.getElementById('comment1').value;
+  commentArray.push(texty);
+})
+console.log(agregator[0].comments);
+*/
+
+
+
+
+
+
+
+
+
+
+/////submit button to trigger pushing comment to array
+const wrapper = document.getElementById('container1');
+
+wrapper.addEventListener('click', (event) => {
+  const isButton = event.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+    
+  }
+  const targetget = event.target.id;
+  const texty = document.getElementById(targetget).value;
+  //agregator.forEach((obj) => obj.commentArray = []);
+  sortedChoice[targetget].commentArray.push(texty);
+  //sortedChoice[targetget].commentAdded = texty;
+  //console.dir(sortedChoice[targetget]);
+  //console.dir(texty);
+  //console.dir(targetget);
+  console.log(sortedChoice[targetget]);
+
+
+  
+  //const textytexty = document.getElementById(sortedChoice[targetget].name).value;
+  //console.dir(textytexty);
+  //sortedChoice[targetget].comments.push(textytexty);
+  //console.dir(sortedChoice);
+  //sortedChoice[targetget].comments.push(texty);
+  //console.dir(sortedChoice[targetget]);
+})
+
+
+
+/*
+document.getElementById().
+addEventListener('click', function(){
+  let texty = document.getElementById('comment1').value;
+  commentArray.push(texty);
+})
+
+console.log(agregator[0].comments);
+*/
+
+
+
+
+/////removing this as not my work
+/*
+const field = document.querySelector('textarea');
+const backUp = field.getAttribute('placeholder');
+const btn = document.querySelector('.btn');
+const clear = document.getElementById('clear')
+const submit = document.querySelector('#submit')
+// const comments = document.querySelector('#comment-box')
+const comments = document.getElementById('comment-box2');
+
+// array to store the comments
+const comments_arr = [];
+
+// to generate html list based on comments array
+const display_comments = () => {
+  let list = '<ul>';
+   comments_arr.forEach(comment => {
+    list += `<li>${comment}</li>`;
+  })
+  list += '</ul>';
+  comments.innerHTML = list;
+}
+
+clear.onClick = function(event){
+  event.preventDefault();
+  // reset the array  
+   comments_arr.length = 0;
+  // re-genrate the comment html list
+  display_comments();
+}
+
+submit.onclick = function(event){
+    event.preventDefault();
+    const content = field.value;
+    if(content.length > 0){ // if there is content
+      // add the comment to the array
+      comments_arr.push(content);
+      // re-genrate the comment html list
+      display_comments();
+      // reset the textArea content 
+      field.value = '';
+    }
+}
+*/

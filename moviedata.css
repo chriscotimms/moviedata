@@ -1,22 +1,38 @@
+.radiocontainer {
+    background-color: rgb(178, 255, 161);
+    border-radius: 10px;
+    padding: 5px;
+    width:30%;
+    margin: 0.5em;
+    margin-left: 35%;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap:5%;
+}
+
 .container {
     background-color: rgb(255, 161, 161);
-    border-radius: 9px;
+    border-radius: 10px;
     padding: 5px;
     width:100%;
     display: flex;
     flex-wrap:wrap;
     justify-content: center;
     align-items: flex-start;
-    gap: 10px 20px;
-
+    gap: 6px 10px;
 }
 
 .movieinfo {
-    background-color: rgb(228, 228, 228);
-    border-radius: 9px;
+    background-color: rgba(228, 228, 228, 0.1);
+    border-radius: 10px;
     padding: 10px;
     width: 350px;
-    order: 2;
+}
+
+.movieinfo:hover {
+    background-color: rgba(228, 228, 228, 0.6);
 }
 
 
@@ -39,16 +55,43 @@
 
 /*text itself*/
 .textInfo {
+    font-family: Georgia, 'Times New Roman', Times, serif;
     position: absolute;
-    top:50%;
-    bottom: 10px;
+    top:40%;
+    bottom: 0px;
     right: 10px;
     left: 10px;
     background-color:rgba(0,0,0,0.7);
     color: white;
+    padding-top: 10px;;
     padding-left: 20px;
     padding-right: 20px;
+    border-radius: 9px;
 }
 
+form {
+    padding: 20px;
+}
 
+.radiobutton {
+    padding:50px;
+}
 
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+input[type="radio"] {
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+  }
