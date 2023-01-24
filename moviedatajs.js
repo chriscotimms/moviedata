@@ -156,12 +156,16 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     textInfo.appendChild(commentButton);
     textContainer.appendChild(commentscomments);
 
+    commentscomments.innerHTML = sortedChoice[i].commentArray;
+    
+    
+
+
 
     //let updatedComs = "No Comments Yet";
     //for (let i = 0; i < sortedArray[i].commentArray.length; i++) {
     //  updatedComs += sortedArray[i].commentArray[i] + '<br><br>';
     //}
-    console.dir('length' + sortedArray[i].commentArray.length);
     //document.getElementById('comments'+[i]).innerHTML = updatedComs;
 
 
@@ -180,10 +184,14 @@ for (var i = 0; i < rad.length; i++) {
         console.log(this.value);
         let sortedChoice = sortByProperty(agregator, `${this.value}`);
         updateMovieInfo(sortedChoice);
-        console.dir(sortedChoice[0].commentArray);
+        //console.dir(sortedChoice[0].commentArray);
         console.log(sortedChoice);
     });
 }
+
+
+
+
 
 // set up initial loading of page
 let sortedChoice = sortByProperty(agregator, 'rating');
@@ -217,18 +225,26 @@ console.log(agregator[0].comments);
 
 
 /////submit button to trigger pushing comment to array
-
+let commentArrayGlobal = [];
 const wrapper = document.getElementById('container1');
 wrapper.addEventListener('click', (event) => {
   const isButton = event.target.nodeName === 'BUTTON';
   if (!isButton) {
     return;
   }
+
   const targetget = event.target.id;
   const texty = document.getElementById(targetget).value;
-
   const comShort = sortedChoice[targetget].commentArray;
+
+  
   comShort.unshift(texty);
+ 
+  //for (let i = 0; i < comShort.length; i++) {
+  //  commentArrayGlobal += comShort[i];
+  //}
+
+ 
 
 
   let allComs = "";
@@ -236,9 +252,11 @@ wrapper.addEventListener('click', (event) => {
     allComs += comShort[i] + '<br><br>';
   }
   document.getElementById('comments'+[targetget]).innerHTML = allComs;
-  console.log(allComs);  
+
+
   
-})
 
-
+  console.log(sortedChoice);
+  
+});
 
