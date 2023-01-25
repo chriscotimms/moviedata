@@ -83,7 +83,7 @@ function sortByProperty(inputArray, property){
    
 }
 
-
+const sortedArrayGlobal = []; 
 //function to clear .movieinfo class objects + repopulate with sorted info
 function updateMovieInfo(sortedArray) {
 
@@ -113,9 +113,10 @@ for (let i = 0; i < sortedArray.length; i++)
     textContainer.className = "textContainer";
     textInfo.className = "textInfo";
     textInfo.setAttribute('id', "textinfo"+[i]);
-    commentButton.setAttribute('id', sortedChoice[i].name); //sortedChoice[i].name
-    commentText.setAttribute('id', sortedChoice[i].name);  //sortedChoice[i].name
-    commentscomments.setAttribute('id', 'comments'+[i]);//div id for comments
+    commentButton.setAttribute('id', sortedArray[i].name); //sortedChoice[i].name
+    commentText.setAttribute('id', sortedArray[i].name);  //sortedChoice[i].name
+    //commentscomments.setAttribute('id', 'comments'+[i]);//div id for comments
+    commentscomments.setAttribute('id', 'comments'+sortedArray[i].name);//div id for comments
     //toggleInfoCom.className = 'toggleInfoCom';
     //toggleInfoCom.setAttribute('id', "toggleInfoCom"+[i]);
 
@@ -135,8 +136,14 @@ for (let i = 0; i < sortedArray.length; i++)
     commentButton.appendChild(texttext);
     textInfo.appendChild(commentButton);
     textContainer.appendChild(commentscomments);
+
+
+    //const filteredResult2 = agregator.findIndex((e) => e.name == targetget);
+    //agregator[filteredResult2].commentArray.unshift(texty);
+
     const fixedComs = sortedArray[i].commentArray;
-    document.getElementById('comments'+[i]).innerHTML = fixedComs.join('<br><br>');
+    console.dir(fixedComs);
+    document.getElementById('comments'+sortedArray[i].name).innerHTML = fixedComs.join('<br><br>');
     
     
 
@@ -236,7 +243,7 @@ const allComs = agregator[filteredResult2].commentArray;
  
 
 console.dir(allComs);
-document.getElementById('comments'+[filteredResult]).innerHTML = allComs.join('<br><br>');
+document.getElementById('comments'+sortedChoice[filteredResult].name).innerHTML = allComs.join('<br><br>');
 
 /*  
 function getbyValue(arr, value) {
