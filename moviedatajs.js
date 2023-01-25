@@ -68,25 +68,8 @@ for (var i = 0; i < agregator.length; i++) {
     agregator[i].imgUrl = filmSrcUrlArray[i];
 };
 
-
-
-
 //create commentArray object key for inputting comments
 agregator.forEach((obj) => obj.commentArray = new Array); 
-
-/////Adding comment arrays to all Movie Objects
-//for (var i = 0; i < agregator.length; i++) {
- //agregator[i].push({'commentArray'});
-  //sortedChoice[i].comments = commentArray;
- //}
-  //console.log(agregator[0].commentArray[0]);
-
-//agregator[0].commentArray = "movie1";
-
-
-
-
-
 
 //using anonymous variables with sort function
 //to be able to call any numerical property to sort
@@ -95,22 +78,19 @@ function sortByProperty(inputArray, property){
   let byRating = inputArrayClone.sort((a, b) => { 
   return b[property] - a[property];
   });
-  return byRating; 
+  console.dir(byRating);
+  return byRating;
+   
 }
-
-
-
-
-
-
-
 
 
 //function to clear .movieinfo class objects + repopulate with sorted info
 function updateMovieInfo(sortedArray) {
 
 document.querySelectorAll(".movieinfo").forEach(elements => elements.remove()); //remove all children with ".movieinfo" class 
-for (let i = 0; i < sortedArray.length; i++) // for loop to process selector through moviedata (/me)
+
+// for loop to process selector through moviedata (/me)
+for (let i = 0; i < sortedArray.length; i++) 
   {
     //create elements para -> textContainer -> img + p
     const para = document.createElement("div"); 
@@ -133,8 +113,8 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     textContainer.className = "textContainer";
     textInfo.className = "textInfo";
     textInfo.setAttribute('id', "textinfo"+[i]);
-    commentButton.setAttribute('id', [i]); //sortedChoice[i].name
-    commentText.setAttribute('id', [i]);  //sortedChoice[i].name
+    commentButton.setAttribute('id', sortedChoice[i].name); //sortedChoice[i].name
+    commentText.setAttribute('id', sortedChoice[i].name);  //sortedChoice[i].name
     commentscomments.setAttribute('id', 'comments'+[i]);//div id for comments
     //toggleInfoCom.className = 'toggleInfoCom';
     //toggleInfoCom.setAttribute('id', "toggleInfoCom"+[i]);
@@ -155,8 +135,8 @@ for (let i = 0; i < sortedArray.length; i++) // for loop to process selector thr
     commentButton.appendChild(texttext);
     textInfo.appendChild(commentButton);
     textContainer.appendChild(commentscomments);
-
-    commentscomments.innerHTML = sortedChoice[i].commentArray;
+    const fixedComs = sortedArray[i].commentArray;
+    document.getElementById('comments'+[i]).innerHTML = fixedComs.join('<br><br>');
     
     
 
@@ -234,27 +214,60 @@ wrapper.addEventListener('click', (event) => {
   }
 
   const targetget = event.target.id;
-  const texty = document.getElementById(targetget).value;
-  const comShort = sortedChoice[targetget].commentArray;
+  //console.dir(targetget);
 
-  
-  comShort.unshift(texty);
+  const texty = document.getElementById(targetget).value;
+  //const texty = event.target.value;
+  console.log(texty);
+
+  const filteredResult = sortedChoice.findIndex((e) => e.name == targetget);
+  sortedChoice[filteredResult].commentArray.unshift(texty);
+//console.log(sortedChoice[filteredResult].commentArray);
+
+const filteredResult2 = agregator.findIndex((e) => e.name == targetget);
+  agregator[filteredResult2].commentArray.unshift(texty);
+//console.log(agregator[filteredResult2].commentArray);
+
+const allComs = agregator[filteredResult2].commentArray;
+//const comList = [];
+//for (let i = 0; i < allComs.length; i++) {
+//  comList += allComs[i] + '<br><br>';
+//}
  
+
+console.dir(allComs);
+document.getElementById('comments'+[filteredResult]).innerHTML = allComs.join('<br><br>');
+
+/*  
+function getbyValue(arr, value) {
+  for (let i = 0; i < sortedChoice.length; i++) {
+    if (arr[i].b == value) return arr[i];
+  }
+}
+getbyValue(sortedChoice, targetget);
+*/
+
+  /*
+  let lookup = {};
+  for (var i = 0; i < sortedChoice.length; i++) {
+    lookup[targetget] = [sortedChoice[i]];
+  }
+console.dir(lookup);
+*/
+
+
+  /*
+  //const comShort = sortedChoice[targetget].commentArray[0];
+  let allComs = "";
   //for (let i = 0; i < comShort.length; i++) {
   //  commentArrayGlobal += comShort[i];
   //}
-
- 
-
-
-  let allComs = "";
+  
   for (let i = 0; i < comShort.length; i++) {
     allComs += comShort[i] + '<br><br>';
   }
   document.getElementById('comments'+[targetget]).innerHTML = allComs;
-
-
-  
+*/
 
   console.log(sortedChoice);
   
