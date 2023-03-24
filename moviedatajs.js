@@ -67,22 +67,25 @@ for (var i = 0; i < agregator.length; i++) {
     agregator[i].imgUrl = filmSrcUrlArray[i];
 };
 
+
 //create commentArray object key for inputting comments
 agregator.forEach((obj) => obj.commentArray = new Array); 
 
-//using anonymous variables with sort function
+
+//clone array using anonymous variables with sort function
 //to be able to call any numerical property to sort
 function sortByProperty(inputArray, property){
   var inputArrayClone = JSON.parse(JSON.stringify(inputArray));
   let byRating = inputArrayClone.sort((a, b) => { 
   return b[property] - a[property];
   });
-  console.dir(byRating);
+  //console.dir(byRating);
   return byRating;
    
 }
 
 const sortedArrayGlobal = []; 
+
 //function to clear .movieinfo class objects + repopulate with sorted info
 function updateMovieInfo(sortedArray) {
 
@@ -97,8 +100,6 @@ for (let i = 0; i < sortedArray.length; i++)
     const image = document.createElement("img"); 
     const textInfo = document.createElement("p");
 
-    //const toggleInfoCom = document.createElement("button");
-    //const toggleInfoComtext = document.createTextNode('reviews');
 
     const commentText = document.createElement("input");
     commentText.setAttribute("type", "text");
@@ -114,48 +115,24 @@ for (let i = 0; i < sortedArray.length; i++)
     textInfo.setAttribute('id', "textinfo"+[i]);
     commentButton.setAttribute('id', sortedArray[i].name); //sortedChoice[i].name
     commentText.setAttribute('id', sortedArray[i].name);  //sortedChoice[i].name
-    //commentscomments.setAttribute('id', 'comments'+[i]);//div id for comments
     commentscomments.setAttribute('id', 'comments'+sortedArray[i].name);//div id for comments
-    //toggleInfoCom.className = 'toggleInfoCom';
-    //toggleInfoCom.setAttribute('id', "toggleInfoCom"+[i]);
 
     //display sorted array + append child functions
     image.src = sortedArray[i].imgUrl;
     textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating + "<br><br>"; //verbose, could clean
     
-    
-
     document.getElementById("container1").appendChild(para).appendChild(textContainer);
     textContainer.appendChild(image);
     textContainer.appendChild(textInfo);
-    //textInfo.appendChild(toggleInfoCom);
-    //toggleInfoCom.appendChild(toggleInfoComtext);
-
     textInfo.appendChild(commentText);
     commentButton.appendChild(texttext);
     textInfo.appendChild(commentButton);
     textContainer.appendChild(commentscomments);
 
-
-    //const filteredResult2 = agregator.findIndex((e) => e.name == targetget);
-    //agregator[filteredResult2].commentArray.unshift(texty);
-
     const fixedComs = sortedArray[i].commentArray;
     console.dir(fixedComs);
     document.getElementById('comments'+sortedArray[i].name).innerHTML = fixedComs.join('<br><br>');
     
-    
-
-
-
-    //let updatedComs = "No Comments Yet";
-    //for (let i = 0; i < sortedArray[i].commentArray.length; i++) {
-    //  updatedComs += sortedArray[i].commentArray[i] + '<br><br>';
-    //}
-    //document.getElementById('comments'+[i]).innerHTML = updatedComs;
-
-
-    //console.log('viewing properties' , sortedArray[i].imgUrl);
   }
 };
 
@@ -177,27 +154,11 @@ for (var i = 0; i < rad.length; i++) {
 
 
 
-
-
 // set up initial loading of page
 let sortedChoice = sortByProperty(agregator, 'rating');
 updateMovieInfo(sortedChoice);
 
-
 ////////////////////////////////////adding comment box////////
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /////submit button to trigger pushing comment to array
 let commentArrayGlobal = [];
@@ -209,62 +170,18 @@ wrapper.addEventListener('click', (event) => {
   }
 
   const targetget = event.target.id;
-  //console.dir(targetget);
-
   const texty = document.getElementById(targetget).value;
-  //const texty = event.target.value;
-  console.log(texty);
-
   const filteredResult = sortedChoice.findIndex((e) => e.name == targetget);
   sortedChoice[filteredResult].commentArray.unshift(texty);
-//console.log(sortedChoice[filteredResult].commentArray);
 
 const filteredResult2 = agregator.findIndex((e) => e.name == targetget);
   agregator[filteredResult2].commentArray.unshift(texty);
-//console.log(agregator[filteredResult2].commentArray);
 
 const allComs = agregator[filteredResult2].commentArray;
-//const comList = [];
-//for (let i = 0; i < allComs.length; i++) {
-//  comList += allComs[i] + '<br><br>';
-//}
- 
 
-console.dir(allComs);
+//console.dir(allComs);
 document.getElementById('comments'+sortedChoice[filteredResult].name).innerHTML = allComs.join('<br><br>');
 
-/*  
-function getbyValue(arr, value) {
-  for (let i = 0; i < sortedChoice.length; i++) {
-    if (arr[i].b == value) return arr[i];
-  }
-}
-getbyValue(sortedChoice, targetget);
-*/
-
-  /*
-  let lookup = {};
-  for (var i = 0; i < sortedChoice.length; i++) {
-    lookup[targetget] = [sortedChoice[i]];
-  }
-console.dir(lookup);
-*/
-
-
-  /*
-  //const comShort = sortedChoice[targetget].commentArray[0];
-  let allComs = "";
-  //for (let i = 0; i < comShort.length; i++) {
-  //  commentArrayGlobal += comShort[i];
-  //}
-  
-  for (let i = 0; i < comShort.length; i++) {
-    allComs += comShort[i] + '<br><br>';
-  }
-  document.getElementById('comments'+[targetget]).innerHTML = allComs;
-*/
-
-  console.log(sortedChoice);
-  
+  //console.log(sortedChoice);
 });
 
