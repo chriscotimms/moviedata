@@ -1,15 +1,15 @@
 .radiocontainer {
     background-color: rgb(178, 255, 161);
     border-radius: 10px;
-    padding: 5px;
-    width:30%;
-    margin: 0.5em;
-    margin-left: 35%;
+    width:30vw;
+    margin-left: 35vw;
+    margin-right: 35vw;
+    /*margin-left: 35%;*/
     display: flex;
     flex-wrap:wrap;
     justify-content: center;
     align-items: flex-start;
-    gap:5%;
+    gap:10%;
 }
 
 .container {
@@ -24,6 +24,9 @@
     gap: 6px 10px;
 }
 
+h2 {
+    font-size: 1rem;
+}
 .movieinfo {
     background-color: rgba(228, 228, 228, 0.1);
     border-radius: 10px;

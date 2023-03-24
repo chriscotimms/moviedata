@@ -1,5 +1,4 @@
 //#Display all info, allow user to sort films via rating etc
-//# also to add other Wes Anderson films
 
 let movieData = {
   "The Darjeeling Limited": {
@@ -55,7 +54,7 @@ const agregator = [];
 for (var i = 0; i < me.length; i++){
   agregator[i] = me[i][1];
 }
-console.log(agregator);
+//console.log(agregator);
 
 
 //add image links
@@ -185,18 +184,7 @@ let sortedChoice = sortByProperty(agregator, 'rating');
 updateMovieInfo(sortedChoice);
 
 
-
 ////////////////////////////////////adding comment box////////
-/*
-let commentArray = [];
-agregator[0].comments = commentArray;
-
-document.getElementById('btn').addEventListener('click', function(){
-  let texty = document.getElementById('comment1').value;
-  commentArray.push(texty);
-})
-console.log(agregator[0].comments);
-*/
 
 
 
