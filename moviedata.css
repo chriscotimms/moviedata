@@ -108,3 +108,13 @@ input[type="radio"] {
     border: 0.15em solid currentColor;
     border-radius: 100%;
   }
+
+
+.hidden {
+    display:none;
+  }
+
+  .choicebuttons {
+    width: 50%;
+    display:inline-block;
+  }

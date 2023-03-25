@@ -170,9 +170,10 @@ wrapper.addEventListener('click', (event) => {
   }
 
   const targetget = event.target.id;
-  const texty = document.getElementById(targetget).value;
+  const texty = "anonymous says:" + "</br>" + document.getElementById(targetget).value;
   const filteredResult = sortedChoice.findIndex((e) => e.name == targetget);
   sortedChoice[filteredResult].commentArray.unshift(texty);
+  console.log(texty);
 
 const filteredResult2 = agregator.findIndex((e) => e.name == targetget);
   agregator[filteredResult2].commentArray.unshift(texty);
@@ -184,4 +185,3 @@ document.getElementById('comments'+sortedChoice[filteredResult].name).innerHTML 
 
   //console.log(sortedChoice);
 });
-
