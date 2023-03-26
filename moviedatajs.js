@@ -194,7 +194,7 @@ for (let i = 0; i < sortedArray.length; i++)
 
     //populate comments and movie info from sortedArray of objects
     image.src = sortedArray[i].imgUrl;
-    textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating + "<br><br>"; 
+    textInfo.innerHTML = "<h3>" + sortedArray[i].name + "</h3>" + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating + "<br><br>"; 
     const fixedComs = sortedArray[i].commentArray;
     comDisplay.innerHTML = fixedComs.join('<br><br>'); //repopulate comment section
 
