@@ -79,6 +79,20 @@ h2 {
     border-radius: 9px;
 }
 
+.comInfo {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    position: absolute;
+    top:10px;
+    right: 10px;
+    left: 10px;
+    background-color:rgba(0,0,0,0.7);
+    color: white;
+    padding-top: 10px;;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 9px;
+}
+
 form {
     padding: 20px;
 }
@@ -114,7 +128,7 @@ input[type="radio"] {
     display:none;
   }
 
-  .choicebuttons {
+  .combtn, .infobtn {
     width: 50%;
     display:inline-block;
   }

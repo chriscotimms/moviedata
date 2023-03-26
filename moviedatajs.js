@@ -84,12 +84,52 @@ function sortByProperty(inputArray, property){
    
 }
 
+//establish additional variables for later code 
 const sortedArrayGlobal = []; 
+let commentArrayGlobal = [];
+let alltextInfo = document.querySelectorAll('.textInfo');
+let allcomInfo = document.querySelectorAll('.comInfo');
+
+//function for displaying info and comments
+const infoToggle = (e) => {
+  let info = e.target.parentNode.querySelector('.textInfo');
+  let com = e.target.parentNode.querySelector('.comInfo');
+  com.classList.add('hidden');
+  info.classList.toggle('hidden');
+};
+
+const comToggle = (e) => {
+  let com = e.target.parentNode.querySelector('.comInfo');
+  let info = e.target.parentNode.querySelector('.textInfo');
+  info.classList.add('hidden');
+  com.classList.toggle('hidden');
+};
+
+
+
+//function for adding comments
+const addComment = (e) => {
+  const targetget = e.target.id;
+  const texty = "anonymous says:" + "</br>" + document.getElementById(e.target.id).value;
+
+  const filteredResult = sortedChoice.findIndex((e) => e.name == targetget);
+  sortedChoice[filteredResult].commentArray.unshift(texty);
+
+  const filteredResult2 = agregator.findIndex((e) => e.name == targetget);
+  agregator[filteredResult2].commentArray.unshift(texty);
+
+  const allComs = agregator[filteredResult2].commentArray;
+  let comDisplayLocation = e.target.parentNode.querySelector('.comDisplay');
+  comDisplayLocation.innerHTML = allComs.join('<br><br>'); //repopulate comment section
+};
+
+
 
 //function to clear .movieinfo class objects + repopulate with sorted info
 function updateMovieInfo(sortedArray) {
-
 document.querySelectorAll(".movieinfo").forEach(elements => elements.remove()); //remove all children with ".movieinfo" class 
+
+
 
 // for loop to process selector through moviedata (/me)
 for (let i = 0; i < sortedArray.length; i++) 
@@ -99,40 +139,64 @@ for (let i = 0; i < sortedArray.length; i++)
     const textContainer = document.createElement("div");
     const image = document.createElement("img"); 
     const textInfo = document.createElement("p");
+    
 
+    //buttons for info and comments
+    const infobtn = document.createElement("button");
+    const combtn = document.createElement("button");
+    const infobtntxt = document.createTextNode('Info');
+    const combtntxt = document.createTextNode('Comments');
 
+    //input for comments
     const commentText = document.createElement("input");
-    commentText.setAttribute("type", "text");
     const commentButton = document.createElement("button");
     const texttext = document.createTextNode('Submit review');
     const commentscomments = document.createElement("div");
+    const comDisplay = document.createElement("p");
 
-    //assign CSS classes (and ID for tracking comments)
+    //assign CSS classes, ID's and attributes
     para.className = "movieinfo";
     para.setAttribute('tabindex', '0');
     image.className = "movieimg";
     textContainer.className = "textContainer";
-    textInfo.className = "textInfo";
+    textInfo.classList.add('textInfo', 'hidden');
+    //textInfo.className = "textInfo";
     textInfo.setAttribute('id', "textinfo"+[i]);
+
+    infobtn.className = "infobtn";
+    infobtn.setAttribute('tabindex', '0');
+    infobtn.addEventListener('click', infoToggle);
+    combtn.className = "combtn";
+    combtn.setAttribute('tabindex', '0');
+    combtn.addEventListener('click', comToggle);
+
+    commentText.setAttribute("type", "text");
     commentButton.setAttribute('id', sortedArray[i].name); //sortedChoice[i].name
+    commentButton.addEventListener('click', addComment);//add eventlistener to comment button
     commentText.setAttribute('id', sortedArray[i].name);  //sortedChoice[i].name
-    commentscomments.setAttribute('id', 'comments'+sortedArray[i].name);//div id for comments
+    commentscomments.classList.add('comInfo', 'hidden');//div id for comments
+    //commentscomments.className = "comInfo";//div id for comments
+    comDisplay.className = "comDisplay";
 
     //display sorted array + append child functions
     image.src = sortedArray[i].imgUrl;
     textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating + "<br><br>"; //verbose, could clean
     
     document.getElementById("container1").appendChild(para).appendChild(textContainer);
+    para.appendChild(infobtn);
+    para.appendChild(combtn);
+    infobtn.appendChild(infobtntxt);
+    combtn.appendChild(combtntxt);
     textContainer.appendChild(image);
     textContainer.appendChild(textInfo);
-    textInfo.appendChild(commentText);
-    commentButton.appendChild(texttext);
-    textInfo.appendChild(commentButton);
     textContainer.appendChild(commentscomments);
+    commentscomments.appendChild(commentText);
+    commentscomments.appendChild(commentButton);
+    commentscomments.appendChild(comDisplay);
+    commentButton.appendChild(texttext);
+    
 
     const fixedComs = sortedArray[i].commentArray;
-    console.dir(fixedComs);
-    document.getElementById('comments'+sortedArray[i].name).innerHTML = fixedComs.join('<br><br>');
     
   }
 };
@@ -145,10 +209,10 @@ for (var i = 0; i < rad.length; i++) {
         if (this !== prev) {
             prev = this; //update prev 
         } 
-        console.log(this.value);
+        //console.log(this.value);
         let sortedChoice = sortByProperty(agregator, `${this.value}`);
         updateMovieInfo(sortedChoice);
-        //console.dir(sortedChoice[0].commentArray);
+  
         console.log(sortedChoice);
     });
 }
@@ -162,6 +226,40 @@ updateMovieInfo(sortedChoice);
 ////////////////////////////////////adding comment box////////
 
 /////submit button to trigger pushing comment to array
+
+
+
+
+/*
+let commentArrayGlobal = [];
+
+const wrapper = document.getElementById('container1');
+wrapper.addEventListener('click', (event) => {
+  const isButton = event.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
+
+  const targetget = event.target.id;
+  const texty = "anonymous says:" + "</br>" + document.getElementById(targetget).value;
+  const filteredResult = sortedChoice.findIndex((e) => e.name == targetget);
+  sortedChoice[filteredResult].commentArray.unshift(texty);
+  console.log(texty);
+
+const filteredResult2 = agregator.findIndex((e) => e.name == targetget);
+  agregator[filteredResult2].commentArray.unshift(texty);
+
+const allComs = agregator[filteredResult2].commentArray;
+
+document.getElementById('comments'+sortedChoice[filteredResult].name).innerHTML = allComs.join('<br><br>');
+});
+*/
+
+
+
+/////submit button to trigger pushing comment to array
+/* BACKUP IN CASE ONE ABOVE GOES HAYWIRE
+
 let commentArrayGlobal = [];
 const wrapper = document.getElementById('container1');
 wrapper.addEventListener('click', (event) => {
@@ -181,8 +279,9 @@ const filteredResult2 = agregator.findIndex((e) => e.name == targetget);
 
 const allComs = agregator[filteredResult2].commentArray;
 
-//console.dir(allComs);
 document.getElementById('comments'+sortedChoice[filteredResult].name).innerHTML = allComs.join('<br><br>');
 
-  //console.log(sortedChoice);
 });
+
+/////BACKUP IN CASE ONE ABOVE GOES HAYWIRE
+*/
