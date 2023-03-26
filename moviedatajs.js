@@ -109,6 +109,7 @@ for (let i = 0; i < sortedArray.length; i++)
 
     //assign CSS classes (and ID for tracking comments)
     para.className = "movieinfo";
+    para.setAttribute('tabindex', '0');
     image.className = "movieimg";
     textContainer.className = "textContainer";
     textInfo.className = "textInfo";
