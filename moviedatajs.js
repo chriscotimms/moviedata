@@ -87,8 +87,7 @@ function sortByProperty(inputArray, property){
 //establish additional variables for later code 
 const sortedArrayGlobal = []; 
 let commentArrayGlobal = [];
-let alltextInfo = document.querySelectorAll('.textInfo');
-let allcomInfo = document.querySelectorAll('.comInfo');
+
 
 //function for displaying info and comments
 const infoToggle = (e) => {
@@ -99,10 +98,19 @@ const infoToggle = (e) => {
 };
 
 const comToggle = (e) => {
+  console.log(e.target);
   let com = e.target.parentNode.querySelector('.comInfo');
   let info = e.target.parentNode.querySelector('.textInfo');
-  info.classList.add('hidden');
-  com.classList.toggle('hidden');
+  info.classList.add('hidden');//hide info section
+  com.classList.toggle('hidden');//reveal comment section
+
+  let comDisplay = e.target.parentNode.querySelector('.comDisplay').id;
+  let filteredResult2 = agregator.findIndex((e) => e.name == comDisplay);
+  let allComs = agregator[filteredResult2].commentArray;
+  
+  comDisplay.innerHTML = allComs.join('<br><br>'); //repopulate comment section
+
+  
 };
 
 
@@ -110,7 +118,7 @@ const comToggle = (e) => {
 //function for adding comments
 const addComment = (e) => {
   const targetget = e.target.id;
-  const texty = "anonymous says:" + "</br>" + document.getElementById(e.target.id).value;
+  const texty = "anonymous says:" + "</br>" + document.getElementById(e.target.id + "text").value;
 
   const filteredResult = sortedChoice.findIndex((e) => e.name == targetget);
   sortedChoice[filteredResult].commentArray.unshift(texty);
@@ -121,6 +129,8 @@ const addComment = (e) => {
   const allComs = agregator[filteredResult2].commentArray;
   let comDisplayLocation = e.target.parentNode.querySelector('.comDisplay');
   comDisplayLocation.innerHTML = allComs.join('<br><br>'); //repopulate comment section
+
+  document.getElementById(e.target.id + "text").value = "";//clear textfield
 };
 
 
@@ -171,17 +181,24 @@ for (let i = 0; i < sortedArray.length; i++)
     combtn.addEventListener('click', comToggle);
 
     commentText.setAttribute("type", "text");
+    commentText.setAttribute('id', sortedArray[i].name + "text");  //sortedChoice[i].name
+    commentText.setAttribute('placeholder', "enter you review here");
+
     commentButton.setAttribute('id', sortedArray[i].name); //sortedChoice[i].name
     commentButton.addEventListener('click', addComment);//add eventlistener to comment button
-    commentText.setAttribute('id', sortedArray[i].name);  //sortedChoice[i].name
+    
     commentscomments.classList.add('comInfo', 'hidden');//div id for comments
     //commentscomments.className = "comInfo";//div id for comments
     comDisplay.className = "comDisplay";
+    comDisplay.setAttribute('id', sortedArray[i].name);
+
+    //populate comments and movie info from sortedArray of objects
+    image.src = sortedArray[i].imgUrl;
+    textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating + "<br><br>"; 
+    const fixedComs = sortedArray[i].commentArray;
+    comDisplay.innerHTML = fixedComs.join('<br><br>'); //repopulate comment section
 
     //display sorted array + append child functions
-    image.src = sortedArray[i].imgUrl;
-    textInfo.innerHTML = sortedArray[i].name + "<br/><br/>" + sortedArray[i].plot + "<br/><br/>" + sortedArray[i].year + "<br/><br/>Runtime: " + sortedArray[i].runtime + " minutes<br/>" + "Rating: " + sortedArray[i].rating + "<br><br>"; //verbose, could clean
-    
     document.getElementById("container1").appendChild(para).appendChild(textContainer);
     para.appendChild(infobtn);
     para.appendChild(combtn);
@@ -194,10 +211,6 @@ for (let i = 0; i < sortedArray.length; i++)
     commentscomments.appendChild(commentButton);
     commentscomments.appendChild(comDisplay);
     commentButton.appendChild(texttext);
-    
-
-    const fixedComs = sortedArray[i].commentArray;
-    
   }
 };
 
@@ -213,7 +226,6 @@ for (var i = 0; i < rad.length; i++) {
         let sortedChoice = sortByProperty(agregator, `${this.value}`);
         updateMovieInfo(sortedChoice);
   
-        console.log(sortedChoice);
     });
 }
 
